@@ -32,13 +32,9 @@ public class ScreenServiceImp implements ScreenService {
 
 		ScreenEntity screenEntity = screenRepo.getScreenByScreenName(screenName, theatreName);
 
-		try {
 			if (screenEntity == null) {
-				throw new ExceptionHandling(screenName + " with " + theatreName + " theatre dosen't exist");
+				throw new ExceptionHandling(theatreName + " with " + screenName + " dosen't exist");
 			}
-		} catch (ExceptionHandling e) {
-			e.printStackTrace();
-		}
 
 		screenDto = modelMapper.map(screenEntity, ScreenDto.class);
 		

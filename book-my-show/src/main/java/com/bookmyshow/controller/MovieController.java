@@ -30,15 +30,10 @@ public class MovieController {
 	Logger logger = (Logger) LoggerFactory.getLogger(MovieController.class);
 	
 	@PostMapping("/save")
-	public MovieEntity createMovie(@RequestBody MovieEntity movieEntity) {
+	public MovieEntity createMovie(@RequestBody MovieEntity movieEntity) throws Exception {
 	
-	 MovieEntity savedMovie = null;
-	try {
-		savedMovie = movieService.saveMovie(movieEntity);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	 MovieEntity savedMovie =  movieService.saveMovie(movieEntity);
+	
 	 
 	 logger.info("------  movie is saved  -------");
 		
@@ -48,18 +43,12 @@ public class MovieController {
 	
 	
 	@GetMapping("/allMovies")
-	public List<MovieDto> getAllMovies(){
+	public List<MovieDto> getAllMovies() throws Exception{
 		
-		List<MovieDto> movieDto = null;
-		
-		
-		try {
+		List<MovieDto> movieDto	 = movieService.getAll();
+
 			logger.info("------ All movies fetched -------");
-			movieDto = movieService.getAll();
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		return movieDto;
 	}
 	
@@ -67,32 +56,19 @@ public class MovieController {
 	@GetMapping("/movieId/{movieId}")
 	public MovieDto getMovieDetails(@PathVariable("movieId") int movieId) throws Exception{
 		
-		MovieDto movieDto = null;
+		MovieDto movieDto = movieService.getMovieById(movieId);
 		
-		try {
-			movieDto = movieService.getMovieById(movieId);
-			logger.info("------  movie is fetched with movie id "+ movieId+" -------");
-		}
-		catch(Exception e){
-			throw new ExceptionHandling("Movie with id " + movieId + " dosen't exist");
-		}
+		logger.info("------  movie is fetched with movie id "+ movieId+" -------");
 		
 		return movieDto;
 	}
 	
 	
 	@GetMapping("/findMovie/{name}")
-	public List<MovieDto> findMovies(@PathVariable("name") String name){
+	public List<MovieDto> findMovies(@PathVariable("name") String name) throws Exception{
 		
-		List<MovieDto> movieDto = null;
+		List<MovieDto> movieDto = movieService.findMovie(name);
 		
-		try {
-			movieDto = movieService.findMovie(name);
-		} 
-		catch (Exception e) {
-		
-			e.printStackTrace();
-		}
 		return movieDto;
 		
 	}

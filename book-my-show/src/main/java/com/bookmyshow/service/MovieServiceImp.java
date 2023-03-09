@@ -48,10 +48,25 @@ public class MovieServiceImp implements MovieService {
 	
 	
 	@Override
-	public MovieDto getMovieById(int movieId) {
+	public MovieDto getMovieById(int movieId) throws Exception {
 	
-	   MovieEntity movieEntity = moviesRepository.findById(movieId).get();
-	   
+//	   MovieEntity movieEntity = moviesRepository.findById(movieId).get();
+//	   
+//	   if(movieEntity == null) {
+//		   throw new ExceptionHandling("Movie with "+ movieId +" dosen't exist");
+//	   }
+//	   
+		MovieEntity movieEntity = null;
+		
+		try {
+			movieEntity = moviesRepository.findById(movieId).get();
+		}
+		catch(Exception e){
+			throw new ExceptionHandling("Movie with "+ movieId +" dosen't exist");
+		}
+	
+		
+		
 	   MovieDto movieDto = modelMapper.map(movieEntity, MovieDto.class);
 		
 		return movieDto;

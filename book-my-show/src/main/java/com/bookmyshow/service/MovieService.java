@@ -10,7 +10,7 @@ public interface MovieService {
 	
 	public MovieEntity saveMovie(MovieEntity movieEntity) throws Exception;
 
-	public MovieDto getMovieById(int movieId);
+	public MovieDto getMovieById(int movieId) throws Exception;
 
 	public List<MovieDto> findMovie(String name) throws Exception;
 

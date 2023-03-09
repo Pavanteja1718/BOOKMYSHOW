@@ -17,16 +17,10 @@ public class ScreenController {
 	ScreenService screenService;
 	
 	@GetMapping("/screen/{screenName}/{theatreName}")
-	public ScreenDto getScreen(@PathVariable("screenName") String screenName,@PathVariable("theatreName") String theatreName){
+	public ScreenDto getScreen(@PathVariable("screenName") String screenName,@PathVariable("theatreName") String theatreName) throws Exception{
 		
-		ScreenDto screenDto = null;
+		ScreenDto screenDto = screenService.getScreen(screenName,theatreName);
 		
-		try {
-			screenDto = screenService.getScreen(screenName,theatreName);
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 		return screenDto;
 		
 	}

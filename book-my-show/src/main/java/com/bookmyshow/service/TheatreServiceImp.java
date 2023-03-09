@@ -28,13 +28,9 @@ public class TheatreServiceImp implements TheatreService{
 		  
 		  List<TheatreDetails> theatreDetails =  theatreRepo.findTheatreByMovieId(movieId);
 		  
-		  try {
 			if(theatreDetails.size()==0) {
 				   throw new ExceptionHandling("Theatres with movie id "+ movieId +" dosen't exist");
 			   }
-		} catch (ExceptionHandling e) {
-			e.printStackTrace();
-		}
 		  
 		  List<TheatreDto> theatreDto =  theatreDetails
 				  .stream()

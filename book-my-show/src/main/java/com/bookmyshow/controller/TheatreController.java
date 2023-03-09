@@ -24,19 +24,12 @@ public class TheatreController {
 	Logger logger = (Logger) LoggerFactory.getLogger(TheatreController.class);
 
 	@GetMapping("/theatre/{movieId}")
-	public List<TheatreDto> getTheatreByMovieId(@PathVariable("movieId") int movieId) {
+	public List<TheatreDto> getTheatreByMovieId(@PathVariable("movieId") int movieId) throws Exception {
 
-		List<TheatreDto> theatreDtos = null;
-
-		try {
+		List<TheatreDto> theatreDtos = theatreService.findTheatreByMovieId(movieId);
 
 			logger.info("------  theatre's list fetched with  movie id " + movieId + " -------");
-			return theatreService.findTheatreByMovieId(movieId);
-		}
-		catch (Exception e) {
-			
-			e.printStackTrace();
-		}
+		
 		return theatreDtos;
 
 	}
