@@ -17,20 +17,28 @@ import ch.qos.logback.classic.Logger;
 @CrossOrigin(origins = "*")
 @RestController
 public class TheatreController {
-	
-	
+
 	@Autowired
 	TheatreService theatreService;
-	
+
 	Logger logger = (Logger) LoggerFactory.getLogger(TheatreController.class);
-	
-	  @GetMapping("/theatre/{movieId}") 
-	  public List<TheatreDto> getTheatreByMovieId(@PathVariable("movieId") int movieId) {
-	  
-		  logger.info("------  theatre's list fetched with  movie id "+ movieId +" -------");
-	  return theatreService.findTheatreByMovieId(movieId);
-	  
-	  }
-	  
-	 
+
+	@GetMapping("/theatre/{movieId}")
+	public List<TheatreDto> getTheatreByMovieId(@PathVariable("movieId") int movieId) {
+
+		List<TheatreDto> theatreDtos = null;
+
+		try {
+
+			logger.info("------  theatre's list fetched with  movie id " + movieId + " -------");
+			return theatreService.findTheatreByMovieId(movieId);
+		}
+		catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return theatreDtos;
+
+	}
+
 }

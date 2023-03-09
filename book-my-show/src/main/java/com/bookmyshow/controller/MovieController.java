@@ -32,7 +32,13 @@ public class MovieController {
 	@PostMapping("/save")
 	public MovieEntity createMovie(@RequestBody MovieEntity movieEntity) {
 	
-	 MovieEntity savedMovie = movieService.saveMovie(movieEntity);
+	 MovieEntity savedMovie = null;
+	try {
+		savedMovie = movieService.saveMovie(movieEntity);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	 
 	 logger.info("------  movie is saved  -------");
 		
@@ -43,13 +49,23 @@ public class MovieController {
 	
 	@GetMapping("/allMovies")
 	public List<MovieDto> getAllMovies(){
-		logger.info("------ All movies fetched -------");
-		return movieService.getAll();
+		
+		List<MovieDto> movieDto = null;
+		
+		
+		try {
+			logger.info("------ All movies fetched -------");
+			movieDto = movieService.getAll();
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return movieDto;
 	}
 	
 	
 	@GetMapping("/movieId/{movieId}")
-	public MovieDto getMovieDetails(@PathVariable("movieId") int movieId){
+	public MovieDto getMovieDetails(@PathVariable("movieId") int movieId) throws Exception{
 		
 		MovieDto movieDto = null;
 		
@@ -68,7 +84,16 @@ public class MovieController {
 	@GetMapping("/findMovie/{name}")
 	public List<MovieDto> findMovies(@PathVariable("name") String name){
 		
-		return movieService.findMovie(name);
+		List<MovieDto> movieDto = null;
+		
+		try {
+			movieDto = movieService.findMovie(name);
+		} 
+		catch (Exception e) {
+		
+			e.printStackTrace();
+		}
+		return movieDto;
 		
 	}
 	

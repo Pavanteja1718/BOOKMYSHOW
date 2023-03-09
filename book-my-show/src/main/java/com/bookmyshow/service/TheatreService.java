@@ -7,6 +7,6 @@ import com.bookmyshow.dto.TheatreDto;
 public interface TheatreService {
 
 	
-	public List<TheatreDto> findTheatreByMovieId(int movieId);
+	public List<TheatreDto> findTheatreByMovieId(int movieId) throws Exception;
 
 }

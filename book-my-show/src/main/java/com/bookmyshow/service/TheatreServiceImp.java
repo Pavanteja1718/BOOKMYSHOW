@@ -24,13 +24,17 @@ public class TheatreServiceImp implements TheatreService{
 	
 
 	
-	  @Override public List<TheatreDto> findTheatreByMovieId(int movieId) {
+	  @Override public List<TheatreDto> findTheatreByMovieId(int movieId) throws Exception {
 		  
 		  List<TheatreDetails> theatreDetails =  theatreRepo.findTheatreByMovieId(movieId);
 		  
-		  if(theatreDetails.size()==0) {
-			   throw new ExceptionHandling("Theatres with movie id "+ movieId +" dosen't exist");
-		   }
+		  try {
+			if(theatreDetails.size()==0) {
+				   throw new ExceptionHandling("Theatres with movie id "+ movieId +" dosen't exist");
+			   }
+		} catch (ExceptionHandling e) {
+			e.printStackTrace();
+		}
 		  
 		  List<TheatreDto> theatreDto =  theatreDetails
 				  .stream()

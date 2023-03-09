@@ -34,7 +34,7 @@ public class MovieServiceImp implements MovieService {
 	Logger logger = (Logger) LoggerFactory.getLogger(MovieController.class);
 
 	@Override
-	public MovieEntity saveMovie(MovieEntity movieEntity) {
+	public MovieEntity saveMovie(MovieEntity movieEntity) throws Exception {
 		
 		if(movieEntity.getHero().isEmpty() || movieEntity.getHeroine().isEmpty() || movieEntity.getMovieName().isEmpty() 
 				|| movieEntity.getOverview().isEmpty() || movieEntity.getPosterPath().isEmpty()) {
@@ -59,7 +59,7 @@ public class MovieServiceImp implements MovieService {
 
 
 	@Override
-	public List<MovieDto> findMovie(String name){
+	public List<MovieDto> findMovie(String name) throws Exception{
 		
 
 		   List<MovieEntity> movieEntities = moviesRepository.findMovie(name);
@@ -82,7 +82,7 @@ public class MovieServiceImp implements MovieService {
 
 
 	@Override
-	public List<MovieDto> getAll(){
+	public List<MovieDto> getAll() throws Exception{
 		
 		List<MovieEntity> movieEntities = moviesRepository.findAll();
 		  

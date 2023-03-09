@@ -26,14 +26,18 @@ public class ScreenServiceImp implements ScreenService {
 
 
 	@Override
-	public ScreenDto getScreen(String screenName, String theatreName){
+	public ScreenDto getScreen(String screenName, String theatreName) throws Exception{
 
 		ScreenDto screenDto = new ScreenDto();
 
 		ScreenEntity screenEntity = screenRepo.getScreenByScreenName(screenName, theatreName);
 
-		if (screenEntity == null) {
-			throw new ExceptionHandling(screenName + " with " + theatreName + " theatre dosen't exist");
+		try {
+			if (screenEntity == null) {
+				throw new ExceptionHandling(screenName + " with " + theatreName + " theatre dosen't exist");
+			}
+		} catch (ExceptionHandling e) {
+			e.printStackTrace();
 		}
 
 		screenDto = modelMapper.map(screenEntity, ScreenDto.class);

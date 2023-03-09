@@ -8,13 +8,13 @@ import com.bookmyshow.entity.MovieEntity;
 public interface MovieService {
 	
 	
-	public MovieEntity saveMovie(MovieEntity movieEntity);
+	public MovieEntity saveMovie(MovieEntity movieEntity) throws Exception;
 
 	public MovieDto getMovieById(int movieId);
 
-	public List<MovieDto> findMovie(String name);
+	public List<MovieDto> findMovie(String name) throws Exception;
 
-	public List<MovieDto> getAll();
+	public List<MovieDto> getAll() throws Exception;
 
 
 
